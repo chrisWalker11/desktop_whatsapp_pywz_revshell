@@ -1,12 +1,16 @@
-# RemoteShellTool
+# Python Reverse Shell POC
 
-**RemoteShellTool** is a Python script designed to create a reverse shell connection to a remote server. It enables remote command execution through a hidden subprocess on the host machine.
+this is a Python script designed to create a reverse shell connection to a remote server. It enables remote command execution through a hidden subprocess on the host machine.
 
 ## Warning
 
 **IMPORTANT NOTICE**
 
 This tool establishes a reverse shell connection, which can bypass standard security measures and may not be detected by antivirus software, including Windows Defender. Unauthorized use of this tool is prohibited and can lead to serious security breaches.
+
+### Recent Related Vulnerability
+
+A recent vulnerability in WhatsApp for Windows was discovered, allowing attackers to execute arbitrary Python and PHP scripts due to insufficient file restrictions. Although reported, Meta has not planned a fix, highlighting the importance of cautious interactions with files from unknown contacts. More details can be found in the [Bitdefender article](https://www.bitdefender.com/blog/hotforsecurity/vulnerability-in-whatsapp-for-windows-could-let-attackers-run-python-php-scripts/).
 
 ### Disclaimer
 
@@ -37,4 +41,6 @@ This script sets up a reverse shell by:
 ## Setup
 
 1. Clone the repository.
-2. Modify the IP address and port in the script to match your server configu
+2. Modify the IP address and port in the script to match your server configuration.
+3. to test the POC you can download whatsapp for windows and then send yourself the file and open it 
+
